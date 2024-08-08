@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import FolderFileNode from "./components/FolderFileNode";
 
+export type Node = {
+  name: string;
+  folders?: Node[];
+};
+const nodes: Node[] = [
+  {
+    name: "Movies",
+    folders: [
+      {
+        name: "Romantic",
+        folders: [
+          {
+            name: "70's",
+            folders: [{ name: "Back to the future" }, { name: "God father" }],
+          },
+          {
+            name: "80's",
+            folders: [{ name: "Notting Hill" }, { name: "Titanic" }],
+          },
+          {
+            name: "90's",
+            folders: [{ name: "Forrest Gump" }, { name: "Harry Potter" }],
+          },
+        ],
+      },
+      { name: "Action" },
+      { name: "Comedy" },
+    ],
+  },
+  {
+    name: "Music",
+    folders: [{ name: "Hip-Hop" }, { name: "Jazz" }],
+  },
+  {
+    name: "Photos",
+    folders: [{ name: "Raw" }, { name: "Jpeg" }, { name: "Png" }],
+  },
+];
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="pt-5 pl-10">
+      {nodes.map((node) => (
+        <FolderFileNode key={node.name} node={node} />
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;
